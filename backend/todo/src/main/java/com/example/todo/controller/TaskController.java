@@ -37,4 +37,26 @@ public class TaskController {
         List<TaskModel> tasks = taskService.getLatestTasks();
         return ResponseEntity.ok(tasks);
     }
+
+    // Mark task as done
+    @PutMapping("/done/{id}")
+    public ResponseEntity<?> markTaskAsDone(@PathVariable Long id) {
+        try {
+            TaskModel task = taskService.markTaskAsDone(id);
+            return ResponseEntity.ok("Task marked as done!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // Delete task
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteTask(@PathVariable Long id) {
+        try {
+            taskService.deleteTask(id);
+            return ResponseEntity.ok("Task deleted successfully!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

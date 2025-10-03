@@ -31,4 +31,20 @@ public class TaskService {
         return taskRepo.findLatest5Tasks();
     }
 
+    // Mark task as done
+    public TaskModel markTaskAsDone(Long id) {
+        TaskModel task = taskRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        task.setDone(true);
+        return taskRepo.save(task);
+    }
+
+    // Delete task
+    public void deleteTask(Long id) {
+        if (!taskRepo.existsById(id)) {
+            throw new RuntimeException("Task not found");
+        }
+        taskRepo.deleteById(id);
+    }
+
 }
