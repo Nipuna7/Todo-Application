@@ -19,4 +19,8 @@ public class TaskModel {
 
     private String title;
     private String description;
+    private boolean done = false;
+
+    @Column(name = "created_at", updatable = false)
+    private java.time.LocalDateTime createdAt = java.time.LocalDateTime.now();
 }
