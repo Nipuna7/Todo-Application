@@ -19,7 +19,6 @@ public class TaskService {
 
     // Add task
     public TaskModel addTask(TaskModel task) {
-
         if (task.getTitle() == null || task.getTitle().isEmpty()) {
             throw new IllegalArgumentException("Title cannot be empty");
         }
