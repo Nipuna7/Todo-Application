@@ -17,20 +17,18 @@ public class TaskService {
     @Autowired
     private TaskRepo taskRepo;
 
-    // Add task
+    // add task
     public TaskModel addTask(TaskModel task) {
-        if (task.getTitle() == null || task.getTitle().isEmpty()) {
-            throw new IllegalArgumentException("Title cannot be empty");
-        }
+        validateTask(task);
         return taskRepo.save(task);
     }
 
-    // Get latest 5 tasks
+    // get latest 5 tasks
     public List<TaskModel> getLatestTasks() {
         return taskRepo.findLatest5Tasks();
     }
 
-    // Mark task as done
+    // mark task as done
     public TaskModel markTaskAsDone(Long id) {
         TaskModel task = taskRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
@@ -38,12 +36,26 @@ public class TaskService {
         return taskRepo.save(task);
     }
 
-    // Delete task
+    // delete task
     public void deleteTask(Long id) {
         if (!taskRepo.existsById(id)) {
             throw new RuntimeException("Task not found");
         }
         taskRepo.deleteById(id);
     }
+
+    //use SRP and OCP principle
+    private void validateTask(TaskModel task){
+        if(task == null){
+            throw new IllegalArgumentException("Task cannot be null");
+        }
+        if(task.getTitle() == null || task.getTitle().trim().isEmpty()){
+            throw new IllegalArgumentException("Task title cannot be empty");
+        }
+        if (task.getDescription() == null || task.getDescription().trim().isEmpty()){
+            throw new IllegalArgumentException("Description cannot be empty");
+        }
+    }
+
 
 }
