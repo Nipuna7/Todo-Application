@@ -30,3 +30,4 @@ The frontend uses **Framer Motion** for animations, **Axios** for API calls, and
 
 ## 📁 Project Structure
 
+![alt text](sssssssssssss.png)
