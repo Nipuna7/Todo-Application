@@ -1,6 +1,0 @@
-com\example\todo\controller\TaskController.class
-com\example\todo\TodoApplication.class
-com\example\todo\model\TaskModel.class
-com\example\todo\service\TaskService.class
-com\example\todo\connfig\CrosConfig.class
-com\example\todo\repo\TaskRepo.class

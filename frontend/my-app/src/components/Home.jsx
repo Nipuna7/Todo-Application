@@ -5,16 +5,11 @@ import { motion } from 'framer-motion';
 import AddTask from './AddTask';
 import TaskList from './TaskList';
 
-const API_BASE_URL = 'http://localhost:8080/task';
+const API_BASE_URL = import.meta.env.VITE_API_URL+"/task";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState('');
-
-  // Fetch latest 5 tasks on component mount
-  useEffect(() => {
-    fetchLatestTasks();
-  }, []);
 
   const fetchLatestTasks = async () => {
     try {
@@ -57,6 +52,11 @@ export default function Home() {
       setError(err.response?.data || 'Error deleting task');
     }
   };
+
+  useEffect(() => {
+    // fetch recent 5 tasks
+    fetchLatestTasks();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
